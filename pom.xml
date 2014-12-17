@@ -18,6 +18,7 @@
 		<module>server-spring-boot-jetty</module>
 		<module>server-spring-boot-undertow</module>
 		<module>server-spring-boot-tomcat</module>
+		<module>server-vertx3-tcp</module>
 	</modules>
 
 	<properties>
