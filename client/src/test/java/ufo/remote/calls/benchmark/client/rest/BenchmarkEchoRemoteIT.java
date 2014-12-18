@@ -17,15 +17,22 @@ public class BenchmarkEchoRemoteIT extends BenchmarkBaseTest {
 	@Autowired
 	private EchoBenchmarkService echoBenchmarkService;
 
-	private final String remoteUrl = "http://localhost:8180/test/echo/helloGet";
+	private final int port = 8184;
 
 	@Test
 	public void testPostEchoReply() throws InterruptedException {
 
-		int parallelThreads = 50;
-		int callsPerThread = 100;
+		int parallelThreads = 1;
+		int callsPerThread = 500;
 
-		echoBenchmarkService.testEcho(remoteUrl, parallelThreads, callsPerThread);
+		//jetty asynch
+		echoBenchmarkService.testEcho(8184, parallelThreads, callsPerThread);
+
+		//vertx
+		echoBenchmarkService.testEcho(8183, parallelThreads, callsPerThread);
+
+		//Spring boot jetty
+		echoBenchmarkService.testEcho(8182, parallelThreads, callsPerThread);
 
 	}
 

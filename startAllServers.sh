@@ -3,6 +3,9 @@ VERSION=1.0.0-SNAPSHOT
 MODULES=()
 MODULES+=("server-spring-boot-tomcat 8180")
 MODULES+=("server-spring-boot-jetty 8181")
+MODULES+=("server-spring-boot-undertow 8182")
+MODULES+=("server-vertx3-tcp 8183")
+MODULES+=("server-jetty-async 8184")
 
 for i in "${MODULES[@]}"
 do

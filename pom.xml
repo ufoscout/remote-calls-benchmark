@@ -18,7 +18,9 @@
 		<module>server-spring-boot-jetty</module>
 		<module>server-spring-boot-undertow</module>
 		<module>server-spring-boot-tomcat</module>
+		<module>server-jetty-async</module>
 		<module>server-vertx3-tcp</module>
+		<module>server-jms-activemq-tcp</module>
 	</modules>
 
 	<properties>

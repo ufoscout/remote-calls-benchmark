@@ -17,6 +17,6 @@ package ufo.remote.calls.benchmark.client;
 
 public interface EchoBenchmarkService {
 
-	void testEcho(String url, int parallelThreads, int callsPerThread);
+	void testEcho(int port, int parallelThreads, int callsPerThread);
 
 }

@@ -2,6 +2,8 @@ package ufo.remote.calls.benchmark;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -16,6 +18,8 @@ import ufo.remote.calls.benchmark.client.EchoBenchmarkService;
 @ComponentScan
 public class Application {
 
+	private final Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	private EchoBenchmarkService echoBenchmarkService;
 	@Autowired
@@ -27,13 +31,44 @@ public class Application {
 
 	@PostConstruct
 	public void init() {
-		String remoteUrl = "http://localhost:8180/test/echo/helloGet";
-		int parallelThreads = 50;
-		int callsPerThread = 100;
+		int port_spring_boot_tomcat = 8180;
+		int port_spring_boot_jetty = 8181;
+		//int port_spring_boot_undertow = 8182;
+		int port_vertx3_tcp = 8183;
+		int port_jetty_async = 8184;
 
-		echoBenchmarkService.testEcho(remoteUrl, parallelThreads, callsPerThread);
+		int parallelThreads = 4;
+		int callsPerThread = 12500;
+
+		//doBenchmark("Spring-Boot-Undertow", port_spring_boot_undertow, parallelThreads, callsPerThread);
+
+		doBenchmark("VERTX3-TCP", port_vertx3_tcp, parallelThreads, callsPerThread);
+
+		doBenchmark("JETTY_ASYNC", port_jetty_async, parallelThreads, callsPerThread);
+
+		doBenchmark("SPRING-BOOT-JETTY", port_spring_boot_jetty, parallelThreads, callsPerThread);
+
+		doBenchmark("SPRING-BOOT-TOMCAT", port_spring_boot_tomcat, parallelThreads, callsPerThread);
 
 		//System.exit(0);
 		//context.close();
+	}
+
+	private void doBenchmark(final String serverType, final int port, final int parallelThreads, final int callsPerThread) {
+		logger.info("---------------------------------------------");
+
+		logger.info("Start [{}] warmup 1", serverType);
+		echoBenchmarkService.testEcho(port, 1, 500);
+
+		logger.info("Start [{}] warmup 2", serverType);
+		echoBenchmarkService.testEcho(port, 1, 500);
+
+		logger.info("Start [{}] benchmark 1", serverType);
+		echoBenchmarkService.testEcho(port, parallelThreads, callsPerThread);
+
+		logger.info("Start [{}] benchmark 1", serverType);
+		echoBenchmarkService.testEcho(port, parallelThreads, callsPerThread);
+
+		logger.info("---------------------------------------------");
 	}
 }

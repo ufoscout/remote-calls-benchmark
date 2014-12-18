@@ -12,6 +12,7 @@
 	<artifactId>client</artifactId>
 
 	<properties>
+		<vertx.version>3.0.0-SNAPSHOT</vertx.version>
 		<start-class>ufo.remote.calls.benchmark.Application</start-class>
 	</properties>
 
@@ -24,6 +25,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-core</artifactId>
+			<version>${vertx.version}</version>
+		</dependency>		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
