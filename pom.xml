@@ -21,6 +21,7 @@
 		<module>server-jetty-async</module>
 		<module>server-vertx3-tcp</module>
 		<module>server-jms-activemq-tcp</module>
+		<module>server-jms-hornetq</module>
 	</modules>
 
 	<properties>
