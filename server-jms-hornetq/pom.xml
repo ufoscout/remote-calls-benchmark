@@ -13,6 +13,7 @@
 	<properties>
 		<start-class>ufo.remote.calls.benchmark.server.jms.activemq.tcp.Application</start-class>
 		<apache.camel.version>2.14.0</apache.camel.version>
+<!-- 		<hornetq.version>2.4.5.Final</hornetq.version> -->
 	</properties>
 
 	<dependencies>
@@ -31,22 +32,25 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms</artifactId>
-			<version>${apache.camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-spring</artifactId>
 			<version>${apache.camel.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-broker</artifactId>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${apache.camel.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.hornetq</groupId>
+			<artifactId>hornetq-jms-client</artifactId>
+<!-- 			<version>${hornetq.version}</version> -->
 		</dependency>
 		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-pool</artifactId>
-		</dependency>	
+			<groupId>org.hornetq</groupId>
+			<artifactId>hornetq-jms-server</artifactId>
+<!-- 			<version>${hornetq.version}</version> -->
+		</dependency>
+
 		<!--Test dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
