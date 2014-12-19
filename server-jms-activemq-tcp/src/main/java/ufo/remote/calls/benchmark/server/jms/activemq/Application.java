@@ -1,4 +1,4 @@
-package ufo.remote.calls.benchmark.server.jms.activemq.tcp;
+package ufo.remote.calls.benchmark.server.jms.activemq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
