@@ -123,7 +123,7 @@ public class BenchmarkImpl implements Benchmark {
 			data.add( new String[]{
 					result.testDescription,
 					"" + result.totalMessages,
-					"" + result.testerResult.message.length,
+					"" + result.testerResult.message.length(),
 					"" + result.testerResult.failures,
 					result.execMillis + "ms",
 					"" + result.messagesPerSecond });

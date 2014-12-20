@@ -17,7 +17,7 @@ package ufo.remote.calls.benchmark.client.caller;
 
 public class TesterResult {
 
-	public byte[] message;
+	public String message;
 	public int totalCalls;
 	public int failures;
 

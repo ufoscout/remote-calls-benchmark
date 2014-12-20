@@ -66,9 +66,9 @@ public class AsyncRestTemplateTester extends Tester {
 		private final CountDownLatch latch;
 		private final AtomicInteger failures;
 		private final String url;
-		private final byte[] message;
+		private final String message;
 
-		Caller(final String url, final byte[] message, final CountDownLatch latch, final AtomicInteger failures) {
+		Caller(final String url, final String message, final CountDownLatch latch, final AtomicInteger failures) {
 			this.url = url;
 			this.message = message;
 			this.latch = latch;
@@ -80,7 +80,7 @@ public class AsyncRestTemplateTester extends Tester {
 		public void run() {
 			try {
 
-				ListenableFuture<ResponseEntity<String>> result = rest.postForEntity(url, new HttpEntity<byte[]>(message), String.class);
+				ListenableFuture<ResponseEntity<String>> result = rest.postForEntity(url, new HttpEntity<String>(message), String.class);
 				result.addCallback(new ListenableFutureCallback<ResponseEntity<String>>() {
 					@Override
 					public void onSuccess(final ResponseEntity<String> arg0) {

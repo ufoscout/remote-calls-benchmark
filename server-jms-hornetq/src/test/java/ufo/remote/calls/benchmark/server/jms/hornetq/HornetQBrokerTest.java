@@ -56,8 +56,8 @@ public class HornetQBrokerTest {
 		ProducerTemplate producerTemplate = camelContext.createProducerTemplate();
 		String message = "HelloMyLittleWorld" + UUID.randomUUID().toString();
 
-		Future<byte[]> response = producerTemplate.asyncRequestBody(EchoQueueConfig.ECHO_QUEUE_URL, message.getBytes(), byte[].class);
-		assertEquals( message, new String( response.get() ) );
+		Future<String> response = producerTemplate.asyncRequestBody(EchoQueueConfig.ECHO_QUEUE_URL, message, String.class);
+		assertEquals( message, response.get() );
 
 	}
 

@@ -32,14 +32,9 @@ public class TesterExecutorImpl implements TesterExecutor {
 
 	@Override
 	public ExcecutionResult execute(final String testDescription, final String message, final int totalCalls, final Tester tester) {
-		return execute(testDescription, message.getBytes(), totalCalls, tester);
-	}
-
-	@Override
-	public ExcecutionResult execute(final String testDescription, final byte[] message, final int totalCalls, final Tester tester) {
 		Date startTime = new Date();
 
-		logger.info("Start testing [{}] with [{}] messages of [{}] bytes", new Object[]{tester.getName(), totalCalls, message.length});
+		logger.info("Start testing [{}] with [{}] messages of [{}] bytes", new Object[]{tester.getName(), totalCalls, message.length()});
 		TesterResult result = tester.start(message, totalCalls);
 
 		ExcecutionResult execResult = new ExcecutionResult();
@@ -49,7 +44,7 @@ public class TesterExecutorImpl implements TesterExecutor {
 		execResult.execMillis = new Date().getTime() - startTime.getTime();
 		execResult.messagesPerSecond = ((result.totalCalls * 1000) / execResult.execMillis);
 
-		logger.info("Time spent to send/receive {} messages of {} bytes: {} ms", new Object[]{ result.totalCalls, result.message.length, TIME_FORMAT.format(execResult.execMillis) });
+		logger.info("Time spent to send/receive {} messages of {} bytes: {} ms", new Object[]{ result.totalCalls, result.message.length(), TIME_FORMAT.format(execResult.execMillis) });
 		logger.info("Failures: {}", result.failures);
 		logger.info("Messages per second: {}", execResult.messagesPerSecond);
 

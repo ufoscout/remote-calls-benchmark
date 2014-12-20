@@ -19,6 +19,4 @@ public interface TesterExecutor {
 
 	ExcecutionResult execute(final String testDescription, final String message, final int totalCalls, final Tester tester);
 
-	ExcecutionResult execute(final String testDescription, final byte[] message, final int totalCalls, final Tester tester);
-
 }
