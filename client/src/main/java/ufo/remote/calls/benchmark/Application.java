@@ -11,7 +11,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import ufo.remote.calls.benchmark.client.EchoBenchmarkService;
+import ufo.remote.calls.benchmark.client.caller.Tester;
+import ufo.remote.calls.benchmark.client.caller.TesterExecutor;
+import ufo.remote.calls.benchmark.client.caller.vertx.VertxHttpClientTester;
 
 @Configuration
 @EnableAutoConfiguration
@@ -21,9 +23,9 @@ public class Application {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private EchoBenchmarkService echoBenchmarkService;
-	@Autowired
 	private ConfigurableApplicationContext context;
+	@Autowired
+	private TesterExecutor testerExecutor;
 
 	public static void main(final String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -37,37 +39,36 @@ public class Application {
 		int port_vertx3_tcp = 8183;
 		int port_jetty_async = 8184;
 
-		int parallelThreads = 4;
-		int callsPerThread = 12500;
+		int totalCalls = 50000;
 
 		//doBenchmark("Spring-Boot-Undertow", port_spring_boot_undertow, parallelThreads, callsPerThread);
 
-		doBenchmark("VERTX3-TCP", port_vertx3_tcp, parallelThreads, callsPerThread);
+		doBenchmark("VERTX3-TCP", totalCalls, new VertxHttpClientTester(port_vertx3_tcp));
 
-		doBenchmark("JETTY_ASYNC", port_jetty_async, parallelThreads, callsPerThread);
+		//doBenchmark("JETTY_ASYNC", port_jetty_async, parallelThreads, callsPerThread);
 
-		doBenchmark("SPRING-BOOT-JETTY", port_spring_boot_jetty, parallelThreads, callsPerThread);
+		//doBenchmark("SPRING-BOOT-JETTY", port_spring_boot_jetty, parallelThreads, callsPerThread);
 
-		doBenchmark("SPRING-BOOT-TOMCAT", port_spring_boot_tomcat, parallelThreads, callsPerThread);
+		//doBenchmark("SPRING-BOOT-TOMCAT", port_spring_boot_tomcat, parallelThreads, callsPerThread);
 
 		//System.exit(0);
 		//context.close();
 	}
 
-	private void doBenchmark(final String serverType, final int port, final int parallelThreads, final int callsPerThread) {
+	private void doBenchmark(final String serverType, final int calls, final Tester tester) {
 		logger.info("---------------------------------------------");
 
 		logger.info("Start [{}] warmup 1", serverType);
-		echoBenchmarkService.testEcho(port, 1, 500);
+		testerExecutor.execute("helloWorld", 100, tester);
 
 		logger.info("Start [{}] warmup 2", serverType);
-		echoBenchmarkService.testEcho(port, 1, 500);
+		testerExecutor.execute("helloWorld", 100, tester);
 
 		logger.info("Start [{}] benchmark 1", serverType);
-		echoBenchmarkService.testEcho(port, parallelThreads, callsPerThread);
+		testerExecutor.execute("helloWorld", calls, tester);
 
-		logger.info("Start [{}] benchmark 1", serverType);
-		echoBenchmarkService.testEcho(port, parallelThreads, callsPerThread);
+		logger.info("Start [{}] benchmark 2", serverType);
+		testerExecutor.execute("helloWorld", calls, tester);
 
 		logger.info("---------------------------------------------");
 	}
