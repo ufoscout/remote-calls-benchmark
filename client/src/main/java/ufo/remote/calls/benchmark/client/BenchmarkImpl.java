@@ -30,6 +30,7 @@ import ufo.remote.calls.benchmark.client.caller.ExcecutionResult;
 import ufo.remote.calls.benchmark.client.caller.Tester;
 import ufo.remote.calls.benchmark.client.caller.TesterExecutor;
 import ufo.remote.calls.benchmark.client.caller.activemq.ActiveMQTester;
+import ufo.remote.calls.benchmark.client.caller.hornetq.HornetQTester;
 import ufo.remote.calls.benchmark.client.caller.resttemplate.AsyncRestTemplateTester;
 
 @Service
@@ -43,6 +44,8 @@ public class BenchmarkImpl implements Benchmark {
 	private BenchmarkConfig config;
 	@Autowired
 	private ActiveMQTester activeMQTester;
+	@Autowired
+	private HornetQTester hornetQTester;
 
 	@Override
 	public void start() {
@@ -75,6 +78,7 @@ public class BenchmarkImpl implements Benchmark {
 
 			doBenchmark("ActiveMQ TCP", results, messages, activeMQTester);
 
+			doBenchmark("HornetQ", results, messages, hornetQTester);
 		}
 
 		printResults(results);
