@@ -20,6 +20,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
@@ -35,10 +36,6 @@ public class AsyncRestTemplateTester extends Tester {
 	private final String hostname;
 	private final String path;
 
-	public AsyncRestTemplateTester(final int port) {
-		this(port, "localhost", "/test/echo/");
-	}
-
 	public AsyncRestTemplateTester(final int port, final String hostname, final String path) {
 		this.port = port;
 		this.hostname = hostname;
@@ -47,13 +44,13 @@ public class AsyncRestTemplateTester extends Tester {
 	@Override
 	protected void startTest(final TesterResult result) {
 
-		String url = "http://" + hostname + ":" + port + path + result.message;
+		String url = "http://" + hostname + ":" + port + path;
 
 		CountDownLatch latch = new CountDownLatch(result.totalCalls);
 		AtomicInteger failures = new AtomicInteger(0);
 		Executor executor = Executors.newFixedThreadPool(10);
 		for (int i=0; i<result.totalCalls; i++) {
-			executor.execute(new Caller(url, 1, latch, failures));
+			executor.execute(new Caller(url, result.message, latch, failures));
 		}
 
 		try {
@@ -67,13 +64,13 @@ public class AsyncRestTemplateTester extends Tester {
 	private class Caller implements Runnable {
 
 		private final CountDownLatch latch;
-		private final int callsPerThread;
 		private final AtomicInteger failures;
 		private final String url;
+		private final byte[] message;
 
-		Caller(final String url, final int callsPerThread, final CountDownLatch latch, final AtomicInteger failures) {
+		Caller(final String url, final byte[] message, final CountDownLatch latch, final AtomicInteger failures) {
 			this.url = url;
-			this.callsPerThread = callsPerThread;
+			this.message = message;
 			this.latch = latch;
 			this.failures = failures;
 		}
@@ -81,24 +78,23 @@ public class AsyncRestTemplateTester extends Tester {
 
 		@Override
 		public void run() {
-			for (int i=0; i<callsPerThread; i++) {
-				try {
-					ListenableFuture<ResponseEntity<String>> result = rest.getForEntity(url, String.class);
-					result.addCallback(new ListenableFutureCallback<ResponseEntity<String>>() {
-						@Override
-						public void onSuccess(final ResponseEntity<String> arg0) {
-							latch.countDown();
-						}
-						@Override
-						public void onFailure(final Throwable arg0) {
-							failures.incrementAndGet();
-							latch.countDown();
-						}
-					});
-				} catch (RuntimeException e) {
-					failures.incrementAndGet();
-					latch.countDown();
-				}
+			try {
+
+				ListenableFuture<ResponseEntity<String>> result = rest.postForEntity(url, new HttpEntity<byte[]>(message), String.class);
+				result.addCallback(new ListenableFutureCallback<ResponseEntity<String>>() {
+					@Override
+					public void onSuccess(final ResponseEntity<String> arg0) {
+						latch.countDown();
+					}
+					@Override
+					public void onFailure(final Throwable arg0) {
+						failures.incrementAndGet();
+						latch.countDown();
+					}
+				});
+			} catch (RuntimeException e) {
+				failures.incrementAndGet();
+				latch.countDown();
 			}
 		}
 

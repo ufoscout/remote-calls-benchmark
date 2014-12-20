@@ -17,8 +17,8 @@ package ufo.remote.calls.benchmark.client.caller;
 
 public interface TesterExecutor {
 
-	void execute(final String message, final int totalCalls, final Tester tester);
+	ExcecutionResult execute(final String testDescription, final String message, final int totalCalls, final Tester tester);
 
-	void execute(final byte[] message, final int totalCalls, final Tester tester);
+	ExcecutionResult execute(final String testDescription, final byte[] message, final int totalCalls, final Tester tester);
 
 }

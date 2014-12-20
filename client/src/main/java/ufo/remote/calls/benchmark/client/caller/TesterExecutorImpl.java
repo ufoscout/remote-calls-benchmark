@@ -31,24 +31,30 @@ public class TesterExecutorImpl implements TesterExecutor {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
-	public void execute(final String message, final int totalCalls, final Tester tester) {
-		execute(message.getBytes(), totalCalls, tester);
+	public ExcecutionResult execute(final String testDescription, final String message, final int totalCalls, final Tester tester) {
+		return execute(testDescription, message.getBytes(), totalCalls, tester);
 	}
 
 	@Override
-	public void execute(final byte[] message, final int totalCalls, final Tester tester) {
+	public ExcecutionResult execute(final String testDescription, final byte[] message, final int totalCalls, final Tester tester) {
 		Date startTime = new Date();
-		logger.info("------------------------------------------------------------------------");
+
 		logger.info("Start testing [{}] with [{}] messages of [{}] bytes", new Object[]{tester.getName(), totalCalls, message.length});
 		TesterResult result = tester.start(message, totalCalls);
 
-		long executionTime = new Date().getTime() - startTime.getTime();
+		ExcecutionResult execResult = new ExcecutionResult();
+		execResult.testDescription = testDescription;
+		execResult.testerResult = result;
+		execResult.totalMessages = totalCalls;
+		execResult.execMillis = new Date().getTime() - startTime.getTime();
+		execResult.messagesPerSecond = ((result.totalCalls * 1000) / execResult.execMillis);
 
-		logger.info("Time spent to send/receive {} messages of {} bytes: {} ms", new Object[]{ result.totalCalls, result.message.length, TIME_FORMAT.format(executionTime) });
+		logger.info("Time spent to send/receive {} messages of {} bytes: {} ms", new Object[]{ result.totalCalls, result.message.length, TIME_FORMAT.format(execResult.execMillis) });
 		logger.info("Failures: {}", result.failures);
-		long messagesPerSecond = ((result.totalCalls * 1000) / executionTime);
-		logger.info("Messages per second: {}", messagesPerSecond);
-		logger.info("------------------------------------------------------------------------");
+		logger.info("Messages per second: {}", execResult.messagesPerSecond);
+
+		return execResult;
+
 	}
 
 }

@@ -16,6 +16,7 @@
 package ufo.remote.calls.benchmark.client.caller.vertx;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpClient;
 import io.vertx.core.http.HttpClientOptions;
 import io.vertx.core.http.HttpClientRequest;
@@ -38,10 +39,6 @@ public class VertxHttpClientTester extends Tester {
 	private final String hostname;
 	private final String path;
 
-	public VertxHttpClientTester(final int port) {
-		this(port, "localhost", "/test/echo/");
-	}
-
 	public VertxHttpClientTester(final int port, final String hostname, final String path) {
 		this.port = port;
 		this.hostname = hostname;
@@ -52,13 +49,13 @@ public class VertxHttpClientTester extends Tester {
 	@Override
 	protected void startTest(final TesterResult result) {
 
-		HttpClient client = vertx.createHttpClient(new HttpClientOptions().setIdleTimeout(5000).setConnectTimeout(5000));
+		HttpClient client = vertx.createHttpClient(new HttpClientOptions().setConnectTimeout(5000));
 		CountDownLatch latch = new CountDownLatch(result.totalCalls);
 		AtomicInteger failures = new AtomicInteger(0);
 
 		for (int i=0; i<result.totalCalls; i++) {
 			int count = i+1;
-			HttpClientRequest req = client.request(HttpMethod.GET, port, hostname, path + result.message);
+			HttpClientRequest req = client.request(HttpMethod.POST, port, hostname, path);
 
 			req.handler(resp -> {
 				//logger.info(count + " - Status [{}]", resp.statusCode());
@@ -66,6 +63,12 @@ public class VertxHttpClientTester extends Tester {
 				if (resp.statusCode()!=200) {
 					failures.incrementAndGet();
 				}
+				if (logger.isDebugEnabled()) {
+					resp.bodyHandler(buffer -> {
+						logger.debug("Received [{}]", buffer.toString());
+					});
+				}
+
 			});
 			req.endHandler(handler -> {
 				latch.countDown();
@@ -77,7 +80,8 @@ public class VertxHttpClientTester extends Tester {
 				latch.countDown();
 			});
 
-			//req.setChunked(true);
+			req.setChunked(true);
+			req.write(Buffer.buffer(result.message));
 			req.end();
 
 		}

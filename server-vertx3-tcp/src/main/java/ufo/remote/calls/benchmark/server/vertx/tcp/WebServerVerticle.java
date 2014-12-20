@@ -22,10 +22,10 @@ public class WebServerVerticle extends AbstractVerticle {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	@Value("${server.port}")
+	@Value("${server.port:8080}")
 	private int port;
 
-	private final String webRoot = "web";
+	//private final String webRoot = "web";
 
 	@PostConstruct
 	public void init() {
@@ -45,6 +45,8 @@ public class WebServerVerticle extends AbstractVerticle {
 		RouteMatcher rm = routeMatcher();
 
 		rm.matchMethod(HttpMethod.GET, "/test/echo/:text", this::handleEchoRequest);
+
+		rm.matchMethod(HttpMethod.POST, "/test/asyncEcho", this::handlePostEchoRequest);
 
 		rm.noMatch(this::handleWebRequest);
 
@@ -67,26 +69,27 @@ public class WebServerVerticle extends AbstractVerticle {
   index.html and such-like
 	 */
 	private void handleWebRequest(final HttpServerRequest request) {
-		if (request.path().contains("..")) {
-			// Disallow urls crafted to see resources outside of the webroot - you may want to do some more sophisticated
-			// checks here
-			request.response().setStatusCode(403).end();
-		} else if (request.path().equals("/")) {
-			// Request for root, so send the index
-			request.response().sendFile(webRoot + "/index.html");
-		} else {
-			// Send the requested resource
-			request.response().sendFile(webRoot + request.path());
-		}
+		logger.debug("No handler available for request received");
+		request.response().setStatusCode(403).end();
 	}
 
-	/*
-  Handle an order posted to the REST API
-	 */
 	private void handleEchoRequest(final HttpServerRequest request) {
 		String text = request.params().get("text");
 		logger.debug("Received parameter [{}]", text);
-		request.bodyHandler(buff -> request.response().end(text));
+		request.bodyHandler(buff -> {
+			request.response().end(text);
+			logger.debug("Response sent");
+		});
+	}
+
+	private void handlePostEchoRequest(final HttpServerRequest request) {
+		logger.debug("Request received");
+		request.bodyHandler(buff -> {
+			String text = buff.toString();
+			logger.debug("Received post body [{}]", text);
+			request.response().end(text);
+			logger.debug("Response sent");
+		});
 	}
 
 	public int getPort() {

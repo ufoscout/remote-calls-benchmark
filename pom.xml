@@ -7,7 +7,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.0.RELEASE</version>
 	</parent>
-	
+
 	<groupId>ufo.test</groupId>
 	<artifactId>remote-calls-benchmark</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
@@ -18,7 +18,7 @@
 		<module>server-spring-boot-jetty</module>
 		<module>server-spring-boot-undertow</module>
 		<module>server-spring-boot-tomcat</module>
-		<module>server-jetty-async</module>
+		<module>server-jetty</module>
 		<module>server-vertx3-tcp</module>
 		<module>server-jms-activemq-tcp</module>
 		<module>server-jms-hornetq</module>
@@ -26,6 +26,49 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<vertx.version>3.0.0-SNAPSHOT</vertx.version>
+		<apache.camel.version>2.14.0</apache.camel.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-core</artifactId>
+				<version>${vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-routematcher</artifactId>
+				<version>${vertx.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.vertx</groupId>
+				<artifactId>vertx-core</artifactId>
+				<version>${vertx.version}</version>
+				<type>test-jar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.3.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-core</artifactId>
+				<version>${apache.camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-jms</artifactId>
+				<version>${apache.camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-spring</artifactId>
+				<version>${apache.camel.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>ufo.test</groupId>
 			<artifactId>server-spring-boot-tomcat</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>${project.version}</version>
 			<classifier>base</classifier>
 			<exclusions>
 				<exclusion>

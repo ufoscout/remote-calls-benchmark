@@ -15,10 +15,13 @@
  ******************************************************************************/
 package ufo.remote.calls.benchmark.client.caller.resttemplate;
 
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ufo.remote.calls.benchmark.client.BenchmarkBaseTest;
+import ufo.remote.calls.benchmark.client.caller.ExcecutionResult;
 import ufo.remote.calls.benchmark.client.caller.TesterExecutor;
 
 public class AsyncRestTemplateTesterIT extends BenchmarkBaseTest {
@@ -37,8 +40,10 @@ public class AsyncRestTemplateTesterIT extends BenchmarkBaseTest {
 		//echoBenchmarkService.testEcho(8184, parallelThreads, callsPerThread);
 
 		//vertx
-		testerExecutor.execute("helloWorld", totalCalls, new AsyncRestTemplateTester(port));
+		ExcecutionResult result = testerExecutor.execute("", "helloWorld", totalCalls, new AsyncRestTemplateTester(port, "localhost", "/test/asyncEcho"));
 
+		assertEquals(totalCalls, result.totalMessages);
+		assertEquals(0 , result.testerResult.failures);
 		//Spring boot jetty
 		//echoBenchmarkService.testEcho(8182, parallelThreads, callsPerThread);
 

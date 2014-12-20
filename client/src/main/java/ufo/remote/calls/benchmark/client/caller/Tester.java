@@ -15,7 +15,29 @@
  ******************************************************************************/
 package ufo.remote.calls.benchmark.client.caller;
 
+import org.apache.commons.lang3.RandomUtils;
+
 public abstract class Tester {
+
+	public static final byte[] BYTE_4    = RandomUtils.nextBytes(4);
+	public static final byte[] BYTE_16   = RandomUtils.nextBytes(16);
+	public static final byte[] BYTE_32   = RandomUtils.nextBytes(32);
+	public static final byte[] BYTE_64   = RandomUtils.nextBytes(64);
+	public static final byte[] BYTE_128  = RandomUtils.nextBytes(128);
+	public static final byte[] BYTE_256  = RandomUtils.nextBytes(256);
+	public static final byte[] BYTE_512  = RandomUtils.nextBytes(512);
+	public static final byte[] BYTE_1K   = RandomUtils.nextBytes(1024);
+	public static final byte[] BYTE_2K   = RandomUtils.nextBytes(2*1024);
+	public static final byte[] BYTE_4K   = RandomUtils.nextBytes(4*1024);
+	public static final byte[] BYTE_8K   = RandomUtils.nextBytes(8*1024);
+	public static final byte[] BYTE_16K  = RandomUtils.nextBytes(16*1024);
+	public static final byte[] BYTE_32K  = RandomUtils.nextBytes(32*1024);
+	public static final byte[] BYTE_64K  = RandomUtils.nextBytes(64*1024);
+	public static final byte[] BYTE_128K = RandomUtils.nextBytes(128*1024);
+	public static final byte[] BYTE_256K = RandomUtils.nextBytes(256*1024);
+	public static final byte[] BYTE_512K = RandomUtils.nextBytes(512*1024);
+	public static final byte[] BYTE_1M   = RandomUtils.nextBytes(1024*1024);
+
 
 	public TesterResult start(final byte[] message, final int totalCalls) {
 		TesterResult result = new TesterResult();

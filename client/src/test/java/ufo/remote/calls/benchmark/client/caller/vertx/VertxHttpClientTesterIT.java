@@ -15,10 +15,13 @@
  ******************************************************************************/
 package ufo.remote.calls.benchmark.client.caller.vertx;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ufo.remote.calls.benchmark.client.BenchmarkBaseTest;
+import ufo.remote.calls.benchmark.client.caller.ExcecutionResult;
 import ufo.remote.calls.benchmark.client.caller.TesterExecutor;
 
 public class VertxHttpClientTesterIT extends BenchmarkBaseTest {
@@ -37,8 +40,10 @@ public class VertxHttpClientTesterIT extends BenchmarkBaseTest {
 		//echoBenchmarkService.testEcho(8184, parallelThreads, callsPerThread);
 
 		//vertx
-		testerExecutor.execute("helloWorld", totalCalls, new VertxHttpClientTester(port));
+		ExcecutionResult result = testerExecutor.execute("", "helloWorld", totalCalls, new VertxHttpClientTester(port, "localhost", "/test/asyncEcho"));
 
+		assertEquals(totalCalls, result.totalMessages);
+		assertEquals(0 , result.testerResult.failures);
 		//Spring boot jetty
 		//echoBenchmarkService.testEcho(8182, parallelThreads, callsPerThread);
 

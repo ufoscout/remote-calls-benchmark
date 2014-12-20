@@ -2,6 +2,8 @@ package ufo.remote.calls.benchmark.server.springboot.rest;
 
 import static org.junit.Assert.*;
 
+import java.util.UUID;
+
 import org.junit.Test;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpStatus;
@@ -13,15 +15,25 @@ import ufo.remote.calls.benchmark.server.springboot.BaseIntegrationTest;
 public class EchoControllerTest extends BaseIntegrationTest {
 
 	@Test
-	public void testGetEchoReply() {
+	public void testPostSyncEchoReply() {
+		doTest("/test/syncEcho");
+	}
+
+	@Test
+	public void testPostAsyncEchoReply() {
+		doTest("/test/asyncEcho");
+	}
+
+	private void doTest(final String path) {
 		RestTemplate rest = new TestRestTemplate();
-		ResponseEntity<String> response = rest.getForEntity(serverUrl + "/test/echo/helloGet", String.class);
+		String message = UUID.randomUUID().toString();
+
+		ResponseEntity<String> response = rest.postForEntity(serverUrl + path, message, String.class);
 		assertEquals( HttpStatus.OK, response.getStatusCode());
 
 		logger.info("Received: [{}]", response.getBody());
 
-		assertTrue(response.getBody().equals("helloGet"));
+		assertEquals(message, response.getBody());
 
 	}
-
 }

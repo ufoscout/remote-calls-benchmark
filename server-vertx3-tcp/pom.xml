@@ -11,7 +11,6 @@
 	<artifactId>server-vertx3-tcp</artifactId>
 	
 	<properties>
-		<vertx.version>3.0.0-SNAPSHOT</vertx.version>
 		<start-class>ufo.remote.calls.benchmark.server.vertx.Application</start-class>
 	</properties>
 
@@ -28,18 +27,15 @@
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-core</artifactId>
-			<version>${vertx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-routematcher</artifactId>
-			<version>${vertx.version}</version>
 		</dependency>
 		<!--Test dependencies -->
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-core</artifactId>
-			<version>${vertx.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
