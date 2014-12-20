@@ -11,7 +11,7 @@
 	<artifactId>server-jms-activemq-tcp</artifactId>
 	
 	<properties>
-		<start-class>ufo.remote.calls.benchmark.server.jms.activemq.tcp.Application</start-class>
+		<start-class>ufo.remote.calls.benchmark.server.jms.Application</start-class>
 	</properties>
 
 	<dependencies>

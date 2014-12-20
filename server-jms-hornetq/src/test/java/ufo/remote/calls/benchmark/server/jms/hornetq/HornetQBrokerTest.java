@@ -30,8 +30,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import ufo.remote.calls.benchmark.server.jms.Application;
 import ufo.remote.calls.benchmark.server.jms.hornetq.HornetQBrokerConfig;
-import ufo.remote.calls.benchmark.server.jms.hornetq.Application;
 import ufo.remote.calls.benchmark.server.jms.hornetq.EchoQueueConfig;
 
 
@@ -56,8 +56,8 @@ public class HornetQBrokerTest {
 		ProducerTemplate producerTemplate = camelContext.createProducerTemplate();
 		String message = "HelloMyLittleWorld" + UUID.randomUUID().toString();
 
-		Future<String> response = producerTemplate.asyncRequestBody(EchoQueueConfig.ECHO_QUEUE_URL, message, String.class);
-		assertEquals( message, response.get() );
+		Future<byte[]> response = producerTemplate.asyncRequestBody(EchoQueueConfig.ECHO_QUEUE_URL, message.getBytes(), byte[].class);
+		assertEquals( message, new String( response.get() ) );
 
 	}
 

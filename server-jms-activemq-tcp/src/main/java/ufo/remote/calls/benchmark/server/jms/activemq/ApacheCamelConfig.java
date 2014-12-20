@@ -45,7 +45,7 @@ public class ApacheCamelConfig {
 	@Bean
 	public ConnectionFactory getPooledConnectionFactory() {
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-		connectionFactory.setBrokerURL(ActiveMqBrokerService.BROKER_URL);
+		connectionFactory.setBrokerURL(ActiveMqBrokerConfig.BROKER_URL);
 		connectionFactory.setAlwaysSessionAsync(false);
 		connectionFactory.setDispatchAsync(true);
 		connectionFactory.setMaxThreadPoolSize(50);

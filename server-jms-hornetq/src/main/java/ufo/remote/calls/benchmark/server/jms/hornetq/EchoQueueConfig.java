@@ -44,9 +44,9 @@ public class EchoQueueConfig {
 						from(ECHO_QUEUE_URL)
 						.setExchangePattern(ExchangePattern.InOut)
 						.process((final Exchange exchange) -> {
-							String message = (String) exchange.getIn().getBody();
+							byte[] message = (byte[]) exchange.getIn().getBody();
 							logger.debug("Received message [{}]", message);
-							exchange.getOut().setBody(message, String.class);
+							exchange.getOut().setBody(message, byte[].class);
 						});
 					} catch (RuntimeException e) {
 						throw new RuntimeException(e);

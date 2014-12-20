@@ -7,6 +7,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import ufo.remote.calls.benchmark.client.Benchmark;
+
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan

@@ -11,7 +11,7 @@
 	<artifactId>server-jms-hornetq</artifactId>
 	
 	<properties>
-		<start-class>ufo.remote.calls.benchmark.server.jms.activemq.tcp.Application</start-class>
+		<start-class>ufo.remote.calls.benchmark.server.jms.Application</start-class>
 	</properties>
 
 	<dependencies>
@@ -38,12 +38,10 @@
 		<dependency>
 			<groupId>org.hornetq</groupId>
 			<artifactId>hornetq-jms-client</artifactId>
-<!-- 			<version>${hornetq.version}</version> -->
 		</dependency>
 		<dependency>
 			<groupId>org.hornetq</groupId>
 			<artifactId>hornetq-jms-server</artifactId>
-<!-- 			<version>${hornetq.version}</version> -->
 		</dependency>
 
 		<!--Test dependencies -->
