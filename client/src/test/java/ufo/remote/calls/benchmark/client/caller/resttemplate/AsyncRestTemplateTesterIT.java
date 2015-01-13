@@ -29,7 +29,7 @@ public class AsyncRestTemplateTesterIT extends BenchmarkBaseTest {
 	@Autowired
 	private TesterExecutor testerExecutor;
 
-	private final int port = 8184;
+	private final int port = 8182;
 
 	@Test
 	public void testPostEchoReply() throws InterruptedException {

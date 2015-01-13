@@ -15,14 +15,20 @@
  ******************************************************************************/
 package ufo.remote.calls.benchmark.server.vertx;
 
+import java.util.concurrent.CountDownLatch;
+
 import javax.annotation.PostConstruct;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
+import io.vertx.spi.cluster.impl.hazelcast.HazelcastClusterManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.hazelcast.config.Config;
 
 import ufo.remote.calls.benchmark.server.vertx.tcp.WebServerVerticle;
 
@@ -30,7 +36,7 @@ import ufo.remote.calls.benchmark.server.vertx.tcp.WebServerVerticle;
 public class VertxServiceImpl implements VertxService {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	private final Vertx vertx = Vertx.vertx();
+	private Vertx vertx;
 
 	@Autowired
 	private WebServerVerticle webServerVerticle;
@@ -41,9 +47,22 @@ public class VertxServiceImpl implements VertxService {
 	}
 
 	@PostConstruct
-	public void init() {
-		logger.info("Initialising vertx verticles...");
-		vertx.deployVerticle(webServerVerticle);
+	public void init() throws InterruptedException {
+		final CountDownLatch latch = new CountDownLatch(1);
+		final VertxOptions options = new VertxOptions();
+		final Config conf = new Config();
+		Vertx.clusteredVertx(options.setClusterHost("localhost").setClusterPort(0).setClustered(true)
+				.setClusterManager(new HazelcastClusterManager(conf)), ar -> {
+					if (ar.failed()) {
+						logger.error("Error starting Vertx cluster", ar.cause());
+					}
+					logger.info("Vertx cluster node started [{}]");
+					vertx = ar.result();
+					logger.info("Initialising vertx verticles...");
+					vertx.deployVerticle(webServerVerticle);
+					latch.countDown();
+				});
+		latch.await();
 	}
 
 }

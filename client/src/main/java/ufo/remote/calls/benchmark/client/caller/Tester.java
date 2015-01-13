@@ -15,28 +15,14 @@
  ******************************************************************************/
 package ufo.remote.calls.benchmark.client.caller;
 
-import org.apache.commons.lang3.RandomUtils;
 
 public abstract class Tester {
 
-	public static final String BYTE_4    = new String(RandomUtils.nextBytes(4));
-	public static final String BYTE_16   = new String(RandomUtils.nextBytes(16));
-	public static final String BYTE_32   = new String(RandomUtils.nextBytes(32));
-	public static final String BYTE_64   = new String(RandomUtils.nextBytes(64));
-	public static final String BYTE_128  = new String(RandomUtils.nextBytes(128));
-	public static final String BYTE_256  = new String(RandomUtils.nextBytes(256));
-	public static final String BYTE_512  = new String(RandomUtils.nextBytes(512));
-	public static final String BYTE_1K   = new String(RandomUtils.nextBytes(1024));
-	public static final String BYTE_2K   = new String(RandomUtils.nextBytes(2*1024));
-	public static final String BYTE_4K   = new String(RandomUtils.nextBytes(4*1024));
-	public static final String BYTE_8K   = new String(RandomUtils.nextBytes(8*1024));
-	public static final String BYTE_16K  = new String(RandomUtils.nextBytes(16*1024));
-	public static final String BYTE_32K  = new String(RandomUtils.nextBytes(32*1024));
-	public static final String BYTE_64K  = new String(RandomUtils.nextBytes(64*1024));
-	public static final String BYTE_128K = new String(RandomUtils.nextBytes(128*1024));
-	public static final String BYTE_256K = new String(RandomUtils.nextBytes(256*1024));
-	public static final String BYTE_512K = new String(RandomUtils.nextBytes(512*1024));
-	public static final String BYTE_1M   = new String(RandomUtils.nextBytes(1024*1024));
+	public static final String BYTE_4    = "ABCD";
+	public static final String BYTE_16   = "ABCD" + "EFGH" + "ILMN" + "OPQR";
+	public static final String BYTE_32   = BYTE_16 + BYTE_16;
+	public static final String BYTE_128  = BYTE_32 + BYTE_32 + BYTE_32 + BYTE_32;
+	public static final String BYTE_512  = BYTE_128 + BYTE_128 + BYTE_128 + BYTE_128;
 
 
 	public TesterResult start(final String message, final int totalCalls) {
