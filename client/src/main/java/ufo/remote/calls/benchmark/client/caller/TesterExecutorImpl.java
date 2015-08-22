@@ -17,7 +17,6 @@ package ufo.remote.calls.benchmark.client.caller;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -32,7 +31,7 @@ public class TesterExecutorImpl implements TesterExecutor {
 
 	@Override
 	public ExcecutionResult execute(final String testDescription, final String message, final int totalCalls, final Tester tester) {
-		Date startTime = new Date();
+		long startTime = System.currentTimeMillis();
 
 		logger.info("Start testing [{}] with [{}] messages of [{}] bytes", new Object[]{tester.getName(), totalCalls, message.length()});
 		TesterResult result = tester.start(message, totalCalls);
@@ -41,7 +40,7 @@ public class TesterExecutorImpl implements TesterExecutor {
 		execResult.testDescription = testDescription;
 		execResult.testerResult = result;
 		execResult.totalMessages = totalCalls;
-		execResult.execMillis = new Date().getTime() - startTime.getTime();
+		execResult.execMillis = System.currentTimeMillis() - startTime;
 		execResult.messagesPerSecond = ((result.totalCalls * 1000) / execResult.execMillis);
 
 		logger.info("Time spent to send/receive {} messages of {} bytes: {} ms", new Object[]{ result.totalCalls, result.message.length(), TIME_FORMAT.format(execResult.execMillis) });

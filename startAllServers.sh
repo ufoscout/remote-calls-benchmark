@@ -6,8 +6,8 @@ MODULES+=("server-spring-boot-jetty 8181")
 MODULES+=("server-spring-boot-undertow 8182")
 MODULES+=("server-vertx3-tcp 8183")
 MODULES+=("server-jetty 8184")
-MODULES+=("server-jms-activemq-tcp 0")
-MODULES+=("server-jms-hornetq 0")
+#MODULES+=("server-jms-activemq-tcp 0")
+#MODULES+=("server-jms-hornetq 0")
 
 for i in "${MODULES[@]}"
 do

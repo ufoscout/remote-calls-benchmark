@@ -19,10 +19,6 @@ import java.util.concurrent.CountDownLatch;
 
 import javax.annotation.PostConstruct;
 
-import io.vertx.core.Vertx;
-import io.vertx.core.VertxOptions;
-import io.vertx.spi.cluster.impl.hazelcast.HazelcastClusterManager;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +26,10 @@ import org.springframework.stereotype.Service;
 
 import com.hazelcast.config.Config;
 
+import io.vertx.core.DeploymentOptions;
+import io.vertx.core.Vertx;
+import io.vertx.core.VertxOptions;
+import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 import ufo.remote.calls.benchmark.server.vertx.tcp.WebServerVerticle;
 
 @Service
@@ -59,7 +59,7 @@ public class VertxServiceImpl implements VertxService {
 					logger.info("Vertx cluster node started [{}]");
 					vertx = ar.result();
 					logger.info("Initialising vertx verticles...");
-					vertx.deployVerticle(webServerVerticle);
+					vertx.deployVerticle(WebServerVerticle.class.getName(), new DeploymentOptions().setInstances(4));
 					latch.countDown();
 				});
 		latch.await();

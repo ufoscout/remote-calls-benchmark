@@ -28,7 +28,7 @@ public class EchoControllerTest extends VertxTestBase {
 
 		String text = UUID.randomUUID().toString();
 
-		int port = webServerVerticle.getPort();
+		int port = 8183; //webServerVerticle.getPort();
 		HttpClient client = vertx.createHttpClient(new HttpClientOptions());
 
 		HttpClientRequest req = client.request(HttpMethod.GET, port, "localhost", "/test/echo/" + text, resp -> {
@@ -54,7 +54,7 @@ public class EchoControllerTest extends VertxTestBase {
 
 		String text = UUID.randomUUID().toString();
 
-		int port = webServerVerticle.getPort();
+		int port = 8183; //webServerVerticle.getPort();
 		HttpClient client = vertx.createHttpClient(new HttpClientOptions());
 
 		HttpClientRequest req = client.request(HttpMethod.POST, port, "localhost", "/test/asyncEcho", resp -> {

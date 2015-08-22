@@ -20,7 +20,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.eventbus.Message;
-import io.vertx.spi.cluster.impl.hazelcast.HazelcastClusterManager;
+import io.vertx.spi.cluster.hazelcast.HazelcastClusterManager;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;

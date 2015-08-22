@@ -122,3 +122,224 @@
 | Vertx 3 Hazelcast Cluster |    50000 |       32 |    0 |    771ms | 64850 |
 | Vertx 3 Hazelcast Cluster |    50000 |      128 |    0 |    790ms | 63291 |
 | Vertx 3 Hazelcast Cluster |    50000 |      512 |    0 |    986ms | 50709 |
+
+
+
+
+
+
++---------------------------+----------+----------+--------+----------+-------+
+|            TYPE           | MESSAGES | BYTES_PM |  FAIL  | TOT_TIME |  MPS  |
++---------------------------+----------+----------+--------+----------+-------+
+| Vertx 3 TCP Server        |      100 |       32 |      0 |    241ms |   414 |
+| Vertx 3 TCP Server        |      100 |      128 |      0 |     69ms |  1449 |
+| Vertx 3 TCP Server        |      100 |      512 |      0 |     36ms |  2777 |
+| Vertx 3 Hazelcast Cluster |      100 |       32 |      0 |     75ms |  1333 |
+| Vertx 3 Hazelcast Cluster |      100 |      128 |      0 |     36ms |  2777 |
+| Vertx 3 Hazelcast Cluster |      100 |      512 |      0 |     31ms |  3225 |
+| Jetty Async Servlet       |      100 |       32 |      0 |     79ms |  1265 |
+| Jetty Async Servlet       |      100 |      128 |      0 |     66ms |  1515 |
+| Jetty Async Servlet       |      100 |      512 |      0 |     77ms |  1298 |
+| Jetty Sync Servlet        |      100 |       32 |      0 |     37ms |  2702 |
+| Jetty Sync Servlet        |      100 |      128 |      0 |     58ms |  1724 |
+| Jetty Sync Servlet        |      100 |      512 |      0 |     26ms |  3846 |
+| SpringBoot Jetty Async    |      100 |       32 |      0 |     36ms |  2777 |
+| SpringBoot Jetty Async    |      100 |      128 |      0 |     29ms |  3448 |
+| SpringBoot Jetty Async    |      100 |      512 |      0 |     16ms |  6250 |
+| SpringBoot Jetty Sync     |      100 |       32 |      0 |     31ms |  3225 |
+| SpringBoot Jetty Sync     |      100 |      128 |      0 |     37ms |  2702 |
+| SpringBoot Jetty Sync     |      100 |      512 |      0 |     26ms |  3846 |
+| SpringBoot Undertow ASync |      100 |       32 |      0 |     59ms |  1694 |
+| SpringBoot Undertow ASync |      100 |      128 |      0 |     98ms |  1020 |
+| SpringBoot Undertow ASync |      100 |      512 |      0 |     42ms |  2380 |
+| SpringBoot Undertow Sync  |      100 |       32 |      0 |     56ms |  1785 |
+| SpringBoot Undertow Sync  |      100 |      128 |      0 |     35ms |  2857 |
+| SpringBoot Undertow Sync  |      100 |      512 |      0 |     29ms |  3448 |
+| SpringBoot Tomcat Async   |      100 |       32 |      0 |     36ms |  2777 |
+| SpringBoot Tomcat Async   |      100 |      128 |      0 |     30ms |  3333 |
+| SpringBoot Tomcat Async   |      100 |      512 |      0 |   1036ms |    96 |
+| SpringBoot Tomcat Sync    |      100 |       32 |      0 |     24ms |  4166 |
+| SpringBoot Tomcat Sync    |      100 |      128 |      0 |     17ms |  5882 |
+| SpringBoot Tomcat Sync    |      100 |      512 |      0 |     42ms |  2380 |
+| Vertx 3 TCP Server        |     1000 |       32 |      0 |     63ms | 15873 |
+| Vertx 3 TCP Server        |     1000 |      128 |      0 |     81ms | 12345 |
+| Vertx 3 TCP Server        |     1000 |      512 |      0 |     75ms | 13333 |
+| Vertx 3 Hazelcast Cluster |     1000 |       32 |      0 |    175ms |  5714 |
+| Vertx 3 Hazelcast Cluster |     1000 |      128 |      0 |    133ms |  7518 |
+| Vertx 3 Hazelcast Cluster |     1000 |      512 |      0 |     65ms | 15384 |
+| Jetty Async Servlet       |     1000 |       32 |      0 |    171ms |  5847 |
+| Jetty Async Servlet       |     1000 |      128 |      0 |    106ms |  9433 |
+| Jetty Async Servlet       |     1000 |      512 |      0 |    168ms |  5952 |
+| Jetty Sync Servlet        |     1000 |       32 |      0 |    139ms |  7194 |
+| Jetty Sync Servlet        |     1000 |      128 |      0 |    100ms | 10000 |
+| Jetty Sync Servlet        |     1000 |      512 |      0 |    120ms |  8333 |
+| SpringBoot Jetty Async    |     1000 |       32 |      0 |    132ms |  7575 |
+| SpringBoot Jetty Async    |     1000 |      128 |      0 |     88ms | 11363 |
+| SpringBoot Jetty Async    |     1000 |      512 |      0 |    160ms |  6250 |
+| SpringBoot Jetty Sync     |     1000 |       32 |      0 |    110ms |  9090 |
+| SpringBoot Jetty Sync     |     1000 |      128 |      0 |    660ms |  1515 |
+| SpringBoot Jetty Sync     |     1000 |      512 |      0 |    113ms |  8849 |
+| SpringBoot Undertow ASync |     1000 |       32 |      0 |    320ms |  3125 |
+| SpringBoot Undertow ASync |     1000 |      128 |      0 |    337ms |  2967 |
+| SpringBoot Undertow ASync |     1000 |      512 |      0 |    337ms |  2967 |
+| SpringBoot Undertow Sync  |     1000 |       32 |      0 |    215ms |  4651 |
+| SpringBoot Undertow Sync  |     1000 |      128 |      0 |    140ms |  7142 |
+| SpringBoot Undertow Sync  |     1000 |      512 |      0 |    218ms |  4587 |
+| SpringBoot Tomcat Async   |     1000 |       32 |      7 |   1172ms |   853 |
+| SpringBoot Tomcat Async   |     1000 |      128 |      7 |    103ms |  9708 |
+| SpringBoot Tomcat Async   |     1000 |      512 |      7 |    102ms |  9803 |
+| SpringBoot Tomcat Sync    |     1000 |       32 |      8 |     84ms | 11904 |
+| SpringBoot Tomcat Sync    |     1000 |      128 |      7 |     93ms | 10752 |
+| SpringBoot Tomcat Sync    |     1000 |      512 |      8 |    125ms |  8000 |
+| Vertx 3 TCP Server        |    10000 |       32 |      0 |    179ms | 55865 |
+| Vertx 3 TCP Server        |    10000 |      128 |      0 |    270ms | 37037 |
+| Vertx 3 TCP Server        |    10000 |      512 |      0 |    213ms | 46948 |
+| Vertx 3 Hazelcast Cluster |    10000 |       32 |      0 |    317ms | 31545 |
+| Vertx 3 Hazelcast Cluster |    10000 |      128 |      0 |    308ms | 32467 |
+| Vertx 3 Hazelcast Cluster |    10000 |      512 |      0 |    306ms | 32679 |
+| Jetty Async Servlet       |    10000 |       32 |      0 |    586ms | 17064 |
+| Jetty Async Servlet       |    10000 |      128 |      0 |    433ms | 23094 |
+| Jetty Async Servlet       |    10000 |      512 |      0 |    543ms | 18416 |
+| Jetty Sync Servlet        |    10000 |       32 |      0 |    509ms | 19646 |
+| Jetty Sync Servlet        |    10000 |      128 |      0 |    521ms | 19193 |
+| Jetty Sync Servlet        |    10000 |      512 |      0 |    444ms | 22522 |
+| SpringBoot Jetty Async    |    10000 |       32 |      0 |    723ms | 13831 |
+| SpringBoot Jetty Async    |    10000 |      128 |      0 |    788ms | 12690 |
+| SpringBoot Jetty Async    |    10000 |      512 |      0 |    780ms | 12820 |
+| SpringBoot Jetty Sync     |    10000 |       32 |      0 |    601ms | 16638 |
+| SpringBoot Jetty Sync     |    10000 |      128 |      0 |    497ms | 20120 |
+| SpringBoot Jetty Sync     |    10000 |      512 |      0 |    538ms | 18587 |
+| SpringBoot Undertow ASync |    10000 |       32 |      0 |   2561ms |  3904 |
+| SpringBoot Undertow ASync |    10000 |      128 |      0 |   2560ms |  3906 |
+| SpringBoot Undertow ASync |    10000 |      512 |      0 |   2687ms |  3721 |
+| SpringBoot Undertow Sync  |    10000 |       32 |      0 |   1243ms |  8045 |
+| SpringBoot Undertow Sync  |    10000 |      128 |      0 |   1309ms |  7639 |
+| SpringBoot Undertow Sync  |    10000 |      512 |      0 |   1261ms |  7930 |
+| SpringBoot Tomcat Async   |    10000 |       32 |     97 |   1045ms |  9569 |
+| SpringBoot Tomcat Async   |    10000 |      128 |     97 |   2095ms |  4773 |
+| SpringBoot Tomcat Async   |    10000 |      512 |     96 |   3052ms |  3276 |
+| SpringBoot Tomcat Sync    |    10000 |       32 |     98 |    710ms | 14084 |
+| SpringBoot Tomcat Sync    |    10000 |      128 |     96 |    762ms | 13123 |
+| SpringBoot Tomcat Sync    |    10000 |      512 |     97 |    692ms | 14450 |
+| Vertx 3 TCP Server        |     1000 |       32 |      0 |     61ms | 16393 |
+| Vertx 3 TCP Server        |     1000 |      128 |      0 |     40ms | 25000 |
+| Vertx 3 TCP Server        |     1000 |      512 |      0 |     61ms | 16393 |
+| Vertx 3 Hazelcast Cluster |     1000 |       32 |      0 |     48ms | 20833 |
+| Vertx 3 Hazelcast Cluster |     1000 |      128 |      0 |     24ms | 41666 |
+| Vertx 3 Hazelcast Cluster |     1000 |      512 |      0 |     56ms | 17857 |
+| Jetty Async Servlet       |     1000 |       32 |      0 |    104ms |  9615 |
+| Jetty Async Servlet       |     1000 |      128 |      0 |    106ms |  9433 |
+| Jetty Async Servlet       |     1000 |      512 |      0 |     51ms | 19607 |
+| Jetty Sync Servlet        |     1000 |       32 |      0 |     52ms | 19230 |
+| Jetty Sync Servlet        |     1000 |      128 |      0 |     92ms | 10869 |
+| Jetty Sync Servlet        |     1000 |      512 |      0 |    100ms | 10000 |
+| SpringBoot Jetty Async    |     1000 |       32 |      0 |    143ms |  6993 |
+| SpringBoot Jetty Async    |     1000 |      128 |      0 |     80ms | 12500 |
+| SpringBoot Jetty Async    |     1000 |      512 |      0 |     73ms | 13698 |
+| SpringBoot Jetty Sync     |     1000 |       32 |      0 |    114ms |  8771 |
+| SpringBoot Jetty Sync     |     1000 |      128 |      0 |     56ms | 17857 |
+| SpringBoot Jetty Sync     |     1000 |      512 |      0 |     67ms | 14925 |
+| SpringBoot Undertow ASync |     1000 |       32 |      0 |    262ms |  3816 |
+| SpringBoot Undertow ASync |     1000 |      128 |      0 |    269ms |  3717 |
+| SpringBoot Undertow ASync |     1000 |      512 |      0 |    318ms |  3144 |
+| SpringBoot Undertow Sync  |     1000 |       32 |      0 |    171ms |  5847 |
+| SpringBoot Undertow Sync  |     1000 |      128 |      0 |    220ms |  4545 |
+| SpringBoot Undertow Sync  |     1000 |      512 |      0 |    240ms |  4166 |
+| SpringBoot Tomcat Async   |     1000 |       32 |      7 |    167ms |  5988 |
+| SpringBoot Tomcat Async   |     1000 |      128 |      8 |    149ms |  6711 |
+| SpringBoot Tomcat Async   |     1000 |      512 |      7 |    107ms |  9345 |
+| SpringBoot Tomcat Sync    |     1000 |       32 |      8 |     84ms | 11904 |
+| SpringBoot Tomcat Sync    |     1000 |      128 |      8 |     62ms | 16129 |
+| SpringBoot Tomcat Sync    |     1000 |      512 |      6 |     73ms | 13698 |
+| Vertx 3 TCP Server        |    10000 |       32 |      0 |    180ms | 55555 |
+| Vertx 3 TCP Server        |    10000 |      128 |      0 |    180ms | 55555 |
+| Vertx 3 TCP Server        |    10000 |      512 |      0 |    289ms | 34602 |
+| Vertx 3 Hazelcast Cluster |    10000 |       32 |      0 |    135ms | 74074 |
+| Vertx 3 Hazelcast Cluster |    10000 |      128 |      0 |    187ms | 53475 |
+| Vertx 3 Hazelcast Cluster |    10000 |      512 |      0 |    202ms | 49504 |
+| Jetty Async Servlet       |    10000 |       32 |      0 |   1481ms |  6752 |
+| Jetty Async Servlet       |    10000 |      128 |      0 |    423ms | 23640 |
+| Jetty Async Servlet       |    10000 |      512 |      0 |    479ms | 20876 |
+| Jetty Sync Servlet        |    10000 |       32 |      0 |    466ms | 21459 |
+| Jetty Sync Servlet        |    10000 |      128 |      0 |    523ms | 19120 |
+| Jetty Sync Servlet        |    10000 |      512 |      0 |    528ms | 18939 |
+| SpringBoot Jetty Async    |    10000 |       32 |      0 |    729ms | 13717 |
+| SpringBoot Jetty Async    |    10000 |      128 |      0 |    910ms | 10989 |
+| SpringBoot Jetty Async    |    10000 |      512 |      0 |    739ms | 13531 |
+| SpringBoot Jetty Sync     |    10000 |       32 |      0 |    529ms | 18903 |
+| SpringBoot Jetty Sync     |    10000 |      128 |      0 |    597ms | 16750 |
+| SpringBoot Jetty Sync     |    10000 |      512 |      0 |    583ms | 17152 |
+| SpringBoot Undertow ASync |    10000 |       32 |      0 |   2597ms |  3850 |
+| SpringBoot Undertow ASync |    10000 |      128 |      0 |   2650ms |  3773 |
+| SpringBoot Undertow ASync |    10000 |      512 |      0 |   2629ms |  3803 |
+| SpringBoot Undertow Sync  |    10000 |       32 |      0 |   1348ms |  7418 |
+| SpringBoot Undertow Sync  |    10000 |      128 |      0 |   1284ms |  7788 |
+| SpringBoot Undertow Sync  |    10000 |      512 |      0 |   1279ms |  7818 |
+| SpringBoot Tomcat Async   |    10000 |       32 |     97 |   1034ms |  9671 |
+| SpringBoot Tomcat Async   |    10000 |      128 |     96 |    986ms | 10141 |
+| SpringBoot Tomcat Async   |    10000 |      512 |     96 |   1085ms |  9216 |
+| SpringBoot Tomcat Sync    |    10000 |       32 |     96 |    720ms | 13888 |
+| SpringBoot Tomcat Sync    |    10000 |      128 |     96 |    779ms | 12836 |
+| SpringBoot Tomcat Sync    |    10000 |      512 |     97 |    734ms | 13623 |
+| Vertx 3 TCP Server        |    50000 |       32 |      0 |    955ms | 52356 |
+| Vertx 3 TCP Server        |    50000 |      128 |      0 |    892ms | 56053 |
+| Vertx 3 TCP Server        |    50000 |      512 |      0 |    978ms | 51124 |
+| Vertx 3 Hazelcast Cluster |    50000 |       32 |      0 |    537ms | 93109 |
+| Vertx 3 Hazelcast Cluster |    50000 |      128 |      0 |    579ms | 86355 |
+| Vertx 3 Hazelcast Cluster |    50000 |      512 |      0 |   2254ms | 22182 |
+| Jetty Async Servlet       |    50000 |       32 |      0 |   2078ms | 24061 |
+| Jetty Async Servlet       |    50000 |      128 |      0 |   2175ms | 22988 |
+| Jetty Async Servlet       |    50000 |      512 |      0 |   2177ms | 22967 |
+| Jetty Sync Servlet        |    50000 |       32 |      0 |   2036ms | 24557 |
+| Jetty Sync Servlet        |    50000 |      128 |      0 |   2153ms | 23223 |
+| Jetty Sync Servlet        |    50000 |      512 |      0 |   2177ms | 22967 |
+| SpringBoot Jetty Async    |    50000 |       32 |      0 |   3579ms | 13970 |
+| SpringBoot Jetty Async    |    50000 |      128 |      0 |   3546ms | 14100 |
+| SpringBoot Jetty Async    |    50000 |      512 |      0 |   3716ms | 13455 |
+| SpringBoot Jetty Sync     |    50000 |       32 |      0 |   2615ms | 19120 |
+| SpringBoot Jetty Sync     |    50000 |      128 |      0 |   2579ms | 19387 |
+| SpringBoot Jetty Sync     |    50000 |      512 |      0 |   2707ms | 18470 |
+| SpringBoot Undertow ASync |    50000 |       32 |      0 |  12857ms |  3888 |
+| SpringBoot Undertow ASync |    50000 |      128 |      0 |  12920ms |  3869 |
+| SpringBoot Undertow ASync |    50000 |      512 |      0 |  13036ms |  3835 |
+| SpringBoot Undertow Sync  |    50000 |       32 |      0 |   6035ms |  8285 |
+| SpringBoot Undertow Sync  |    50000 |      128 |      0 |   5959ms |  8390 |
+| SpringBoot Undertow Sync  |    50000 |      512 |      0 |   6066ms |  8242 |
+| SpringBoot Tomcat Async   |    50000 |       32 |    493 |   5822ms |  8588 |
+| SpringBoot Tomcat Async   |    50000 |      128 |    492 |   4936ms | 10129 |
+| SpringBoot Tomcat Async   |    50000 |      512 |    493 |   4982ms | 10036 |
+| SpringBoot Tomcat Sync    |    50000 |       32 |    493 |   3228ms | 15489 |
+| SpringBoot Tomcat Sync    |    50000 |      128 |    492 |   3360ms | 14880 |
+| SpringBoot Tomcat Sync    |    50000 |      512 |    492 |   3388ms | 14757 |
+| Vertx 3 TCP Server        |   500000 |       32 |      0 |  13817ms | 36187 |
+| Vertx 3 TCP Server        |   500000 |      128 |      0 |  12269ms | 40753 |
+| Vertx 3 TCP Server        |   500000 |      512 |      0 |  14234ms | 35127 |
+| Vertx 3 Hazelcast Cluster |   500000 |       32 |      0 |  25879ms | 19320 |
+| Vertx 3 Hazelcast Cluster |   500000 |      128 |      0 |  36646ms | 13644 |
+| Vertx 3 Hazelcast Cluster |   500000 |      512 | 488826 |  46772ms | 10690 |
+| Jetty Async Servlet       |   500000 |       32 |      0 |  28227ms | 17713 |
+| Jetty Async Servlet       |   500000 |      128 |      0 |  24047ms | 20792 |
+| Jetty Async Servlet       |   500000 |      512 |      0 |  29167ms | 17142 |
+| Jetty Sync Servlet        |   500000 |       32 |      0 |  23562ms | 21220 |
+| Jetty Sync Servlet        |   500000 |      128 |      0 |  24478ms | 20426 |
+| Jetty Sync Servlet        |   500000 |      512 |      0 |  28655ms | 17448 |
+| SpringBoot Jetty Async    |   500000 |       32 |      0 |  40363ms | 12387 |
+| SpringBoot Jetty Async    |   500000 |      128 |      0 |  38835ms | 12874 |
+| SpringBoot Jetty Async    |   500000 |      512 |      0 |  44738ms | 11176 |
+| SpringBoot Jetty Sync     |   500000 |       32 |      0 |  28313ms | 17659 |
+| SpringBoot Jetty Sync     |   500000 |      128 |      0 |  29520ms | 16937 |
+| SpringBoot Jetty Sync     |   500000 |      512 |      0 |  32507ms | 15381 |
+| SpringBoot Undertow ASync |   500000 |       32 |      0 | 133427ms |  3747 |
+| SpringBoot Undertow ASync |   500000 |      128 |      0 | 131533ms |  3801 |
+| SpringBoot Undertow ASync |   500000 |      512 |      0 | 138050ms |  3621 |
+| SpringBoot Undertow Sync  |   500000 |       32 |      0 |  68210ms |  7330 |
+| SpringBoot Undertow Sync  |   500000 |      128 |      0 |  62282ms |  8028 |
+| SpringBoot Undertow Sync  |   500000 |      512 |      0 |  68052ms |  7347 |
+| SpringBoot Tomcat Async   |   500000 |       32 |   4948 |  58083ms |  8608 |
+| SpringBoot Tomcat Async   |   500000 |      128 |   4947 |  58512ms |  8545 |
+| SpringBoot Tomcat Async   |   500000 |      512 |   4949 |  67805ms |  7374 |
+| SpringBoot Tomcat Sync    |   500000 |       32 |   4948 |  34672ms | 14420 |
+| SpringBoot Tomcat Sync    |   500000 |      128 |   4949 |  34837ms | 14352 |
+| SpringBoot Tomcat Sync    |   500000 |      512 |   4948 |  40902ms | 12224 |
++---------------------------+----------+----------+--------+----------+-------+
+

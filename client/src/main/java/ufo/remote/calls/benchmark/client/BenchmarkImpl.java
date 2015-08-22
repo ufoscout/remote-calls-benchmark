@@ -64,7 +64,7 @@ public class BenchmarkImpl implements Benchmark {
 		int port_vertx3_tcp = 8183;
 		int port_jetty = 8184;
 
-		int[] rampUpMessages = new int[]{100, 1000, 10000, 100, 1000, 10000, 100, 1000, 10000};
+		int[] rampUpMessages = new int[]{100, 1000, 10000, 1000, 10000, 50000, 500000};
 
 		for (int messages : rampUpMessages) {
 
@@ -72,20 +72,29 @@ public class BenchmarkImpl implements Benchmark {
 
 			doBenchmark("Vertx 3 Hazelcast Cluster", results, messages, vertxClusterTester);
 
-			doBenchmark("Jetty Async Servlet", results, messages, new AsyncRestTemplateTester(port_jetty, config.getHost(), servletAsyncPath));
-			doBenchmark("Jetty Sync Servlet", results, messages, new AsyncRestTemplateTester(port_jetty, config.getHost(), servletSyncPath));
+			//doBenchmark("Jetty Async Servlet", results, messages, new AsyncRestTemplateTester(port_jetty, config.getHost(), servletAsyncPath));
+			doBenchmark("Jetty Async Servlet", results, messages, new VertxHttpClientTester(port_jetty, config.getHost(), servletAsyncPath));
+			//doBenchmark("Jetty Sync Servlet", results, messages, new AsyncRestTemplateTester(port_jetty, config.getHost(), servletSyncPath));
+			doBenchmark("Jetty Sync Servlet", results, messages, new VertxHttpClientTester(port_jetty, config.getHost(), servletAsyncPath));
 
-			doBenchmark("SpringBoot Jetty Async", results, messages, new AsyncRestTemplateTester(port_spring_boot_jetty, config.getHost(), servletAsyncPath));
-			doBenchmark("SpringBoot Jetty Sync", results, messages, new AsyncRestTemplateTester(port_spring_boot_jetty, config.getHost(), servletSyncPath));
+			//doBenchmark("SpringBoot Jetty Async", results, messages, new AsyncRestTemplateTester(port_spring_boot_jetty, config.getHost(), servletAsyncPath));
+			doBenchmark("SpringBoot Jetty Async", results, messages, new VertxHttpClientTester(port_spring_boot_jetty, config.getHost(), servletAsyncPath));
+			//doBenchmark("SpringBoot Jetty Sync", results, messages, new AsyncRestTemplateTester(port_spring_boot_jetty, config.getHost(), servletSyncPath));
+			doBenchmark("SpringBoot Jetty Sync", results, messages, new VertxHttpClientTester(port_spring_boot_jetty, config.getHost(), servletSyncPath));
 
-			doBenchmark("SpringBoot Undertow Sync", results, messages, new AsyncRestTemplateTester(port_spring_boot_undertow, config.getHost(), servletSyncPath));
+			//doBenchmark("SpringBoot Undertow ASync", results, messages, new AsyncRestTemplateTester(port_spring_boot_undertow, config.getHost(), servletAsyncPath));
+			doBenchmark("SpringBoot Undertow ASync", results, messages, new VertxHttpClientTester(port_spring_boot_undertow, config.getHost(), servletAsyncPath));
+			//doBenchmark("SpringBoot Undertow Sync", results, messages, new AsyncRestTemplateTester(port_spring_boot_undertow, config.getHost(), servletSyncPath));
+			doBenchmark("SpringBoot Undertow Sync", results, messages, new VertxHttpClientTester(port_spring_boot_undertow, config.getHost(), servletSyncPath));
 
-			doBenchmark("SpringBoot Tomcat Async", results, messages, new AsyncRestTemplateTester(port_spring_boot_tomcat, config.getHost(), servletAsyncPath));
-			doBenchmark("SpringBoot Tomcat Sync", results, messages, new AsyncRestTemplateTester(port_spring_boot_tomcat, config.getHost(), servletSyncPath));
+			//doBenchmark("SpringBoot Tomcat Async", results, messages, new AsyncRestTemplateTester(port_spring_boot_tomcat, config.getHost(), servletAsyncPath));
+			doBenchmark("SpringBoot Tomcat Async", results, messages, new VertxHttpClientTester(port_spring_boot_tomcat, config.getHost(), servletAsyncPath));
+			//doBenchmark("SpringBoot Tomcat Sync", results, messages, new AsyncRestTemplateTester(port_spring_boot_tomcat, config.getHost(), servletSyncPath));
+			doBenchmark("SpringBoot Tomcat Sync", results, messages, new VertxHttpClientTester(port_spring_boot_tomcat, config.getHost(), servletSyncPath));
 
-			doBenchmark("ActiveMQ TCP", results, messages, activeMQTester);
+			//doBenchmark("ActiveMQ TCP", results, messages, activeMQTester);
 
-			doBenchmark("HornetQ", results, messages, hornetQTester);
+			//doBenchmark("HornetQ", results, messages, hornetQTester);
 		}
 
 		printResults(results);
@@ -99,18 +108,24 @@ public class BenchmarkImpl implements Benchmark {
 		results.add( testerExecutor.execute(testDescriptio, Tester.BYTE_32, calls, tester) );
 
 		try {
-			Thread.sleep(250);
+			Thread.sleep(2500);
 		} catch (InterruptedException e) {
 		}
 
 		results.add( testerExecutor.execute(testDescriptio, Tester.BYTE_128, calls, tester) );
 
 		try {
-			Thread.sleep(250);
+			Thread.sleep(2500);
 		} catch (InterruptedException e) {
 		}
 
 		results.add( testerExecutor.execute(testDescriptio, Tester.BYTE_512, calls, tester) );
+		
+		try {
+			Thread.sleep(2500);
+		} catch (InterruptedException e) {
+		}
+		
 		logger.info("------------------------------------------------------------------------");
 	}
 

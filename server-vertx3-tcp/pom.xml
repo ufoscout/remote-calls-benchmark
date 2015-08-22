@@ -34,7 +34,7 @@
 		</dependency>		
 		<dependency>
 			<groupId>io.vertx</groupId>
-			<artifactId>vertx-routematcher</artifactId>
+			<artifactId>vertx-web</artifactId>
 		</dependency>
 		<!--Test dependencies -->
 		<dependency>
