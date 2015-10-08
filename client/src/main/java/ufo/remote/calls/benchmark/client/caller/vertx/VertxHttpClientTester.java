@@ -49,7 +49,7 @@ public class VertxHttpClientTester extends Tester {
 	@Override
 	protected void startTest(final TesterResult result) {
 
-		HttpClient client = vertx.createHttpClient(new HttpClientOptions().setIdleTimeout(5000).setConnectTimeout(5000));
+		HttpClient client = vertx.createHttpClient(new HttpClientOptions().setIdleTimeout(5).setConnectTimeout(5000));
 		CountDownLatch latch = new CountDownLatch(result.totalCalls);
 		AtomicInteger failures = new AtomicInteger(0);
 

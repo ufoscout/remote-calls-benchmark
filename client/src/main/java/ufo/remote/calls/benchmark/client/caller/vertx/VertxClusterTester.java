@@ -81,6 +81,7 @@ public class VertxClusterTester extends Tester {
 
 				if (response.failed()) {
 					failures.incrementAndGet();
+					logger.error("hazelcast call failed", response.cause());
 				}
 
 				if (logger.isDebugEnabled()) {
