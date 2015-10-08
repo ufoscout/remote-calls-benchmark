@@ -63,7 +63,7 @@ public class BenchmarkImpl implements Benchmark {
 		int port_vertx3_tcp = 8183;
 		int port_jetty = 8184;
 
-		int[] rampUpMessages = new int[]{100, 1000, 10_000, 50_000, 500_000};
+		int[] rampUpMessages = new int[]{100, 1000, 10_000, 50_000, 100_000};
 
 		for (int messages : rampUpMessages) {
 
