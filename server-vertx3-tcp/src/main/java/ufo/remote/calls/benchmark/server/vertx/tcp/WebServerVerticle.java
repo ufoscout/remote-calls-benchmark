@@ -1,7 +1,5 @@
 package ufo.remote.calls.benchmark.server.vertx.tcp;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,15 +21,6 @@ public class WebServerVerticle extends SyncVerticle {
 
 	private int port = 8183;
 
-	// private final String webRoot = "web";
-
-	@PostConstruct
-	public void init() {
-		if (port < 1) {
-			port = 8183;
-		}
-	}
-
 	@Override
 	@Suspendable
 	public void start(final Future<Void> startFuture) {
@@ -46,15 +35,15 @@ public class WebServerVerticle extends SyncVerticle {
 
 		rm.route().handler(BodyHandler.create());
 
-		rm.get("/test/syncEcho").handler(context -> {
+		rm.get("/test/syncEcho").handler(Sync.fiberHandler(context -> {
 			HttpServerRequest request = context.request();
 			String text = request.params().get("text");
 			logger.debug("Received get param [{}]", text);
 			Message<String> reply = Sync.awaitResult(h -> vertx.eventBus().send("syncEcho", text, h));
 			request.response().end(reply.body());
 			logger.debug("Response sent");
-		});
-		rm.post("/test/syncEcho").handler(this::handleSyncPostEchoRequest);
+		}));
+		rm.post("/test/syncEcho").handler(Sync.fiberHandler(this::handleSyncPostEchoRequest));
 		vertx.eventBus().<String> consumer("syncEcho").handler(message -> {
 			message.reply(message.body());
 		});

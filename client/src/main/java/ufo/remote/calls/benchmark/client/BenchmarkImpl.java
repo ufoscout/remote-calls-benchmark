@@ -31,7 +31,6 @@ import ufo.remote.calls.benchmark.client.caller.Tester;
 import ufo.remote.calls.benchmark.client.caller.TesterExecutor;
 import ufo.remote.calls.benchmark.client.caller.activemq.ActiveMQTester;
 import ufo.remote.calls.benchmark.client.caller.hornetq.HornetQTester;
-import ufo.remote.calls.benchmark.client.caller.resttemplate.AsyncRestTemplateTester;
 import ufo.remote.calls.benchmark.client.caller.vertx.VertxClusterTester;
 import ufo.remote.calls.benchmark.client.caller.vertx.VertxHttpClientTester;
 
@@ -64,11 +63,12 @@ public class BenchmarkImpl implements Benchmark {
 		int port_vertx3_tcp = 8183;
 		int port_jetty = 8184;
 
-		int[] rampUpMessages = new int[]{100, 1000, 10000, 1000, 10000, 50000, 500000};
+		int[] rampUpMessages = new int[]{100, 1000, 10000, 1000, 10000};
 
 		for (int messages : rampUpMessages) {
 
-			doBenchmark("Vertx 3 TCP Server", results, messages, new VertxHttpClientTester(port_vertx3_tcp, config.getHost(), servletAsyncPath));
+			doBenchmark("Vertx 3 TCP Server - Async", results, messages, new VertxHttpClientTester(port_vertx3_tcp, config.getHost(), servletAsyncPath));
+			doBenchmark("Vertx 3 TCP Server - Sync", results, messages, new VertxHttpClientTester(port_vertx3_tcp, config.getHost(), servletSyncPath));
 
 			doBenchmark("Vertx 3 Hazelcast Cluster", results, messages, vertxClusterTester);
 
@@ -120,12 +120,12 @@ public class BenchmarkImpl implements Benchmark {
 		}
 
 		results.add( testerExecutor.execute(testDescriptio, Tester.BYTE_512, calls, tester) );
-		
+
 		try {
 			Thread.sleep(2500);
 		} catch (InterruptedException e) {
 		}
-		
+
 		logger.info("------------------------------------------------------------------------");
 	}
 
