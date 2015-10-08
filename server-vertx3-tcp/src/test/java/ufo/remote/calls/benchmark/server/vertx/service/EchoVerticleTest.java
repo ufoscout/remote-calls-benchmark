@@ -15,41 +15,50 @@
  ******************************************************************************/
 package ufo.remote.calls.benchmark.server.vertx.service;
 
+import java.util.UUID;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
-import io.vertx.test.core.VertxTestBase;
+import io.vertx.ext.unit.Async;
+import io.vertx.ext.unit.TestContext;
+import io.vertx.ext.unit.junit.VertxUnitRunner;
 
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
-
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-
-import ufo.remote.calls.benchmark.server.vertx.Application;
-import ufo.remote.calls.benchmark.server.vertx.VertxService;
-
-public class EchoVerticleTest extends VertxTestBase {
+@RunWith(VertxUnitRunner.class)
+public class EchoVerticleTest {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	private final ConfigurableApplicationContext context = SpringApplication.run(Application.class);
+	private Vertx vertx;
+
+	@Before
+	public void setUp(TestContext context) {
+		vertx = Vertx.vertx();
+		vertx.deployVerticle(EchoVerticle.class.getName(), context.asyncAssertSuccess());
+	}
+
+	@After
+	public void tearDown(TestContext context) {
+		vertx.close(context.asyncAssertSuccess());
+	}
 
 	@Test
-	public void testGetEchoServer() throws InterruptedException {
-		Vertx vertx = context.getBean(VertxService.class).vertx();
+	public void testMyApplication(TestContext context) {
+		final Async async = context.async();
 
 		final String message = UUID.randomUUID().toString();
 		vertx.eventBus().send("echo", message, (AsyncResult<Message<String>> response) -> {
-			assertTrue(response.succeeded());
+			context.assertTrue(response.succeeded());
 			logger.info("expected text [{}], received text [{}]", message, response.result().body());
-			assertEquals(message, response.result().body());
-			testComplete();
+			context.assertEquals(message, response.result().body());
+			async.complete();
 		});
-
-		await(30, TimeUnit.SECONDS);
 	}
 
 }
